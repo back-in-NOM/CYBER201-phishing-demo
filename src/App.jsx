@@ -29,7 +29,7 @@ function App() {
       <header className="header">
         <div style={{ display: 'flex' }}>
           <div style={{ backgroundColor: 'rgb(0, 125, 165)', height: '74px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '56px', padding: '0px', margin: '0px' }}>
-            <img role="presentation" src="/images/chad.png" alt="" style={{ margin: '0px', padding: '0px' }} height="36" />
+            <img className='header-chad' role="presentation" src="/images/chad.png" alt="" style={{ margin: '0px', padding: '0px' }} height="36" />
           </div>
           <img role="presentation" src="/images/blueRays.svg" alt="" style={{ margin: '0px', padding: '0px' }} height="74" width="48" />
           <a href="https://www.churchofjesuschrist.org/?lang=eng" style={{ display: 'flex', alignItems: 'center' }}>
