@@ -1,16 +1,85 @@
-# React + Vite
+# CYBER201 Phishing Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A social engineering awareness demonstration for CYBER201. This interactive demo shows users how much personal information can be collected by a website without their explicit consent.
 
-Currently, two official plugins are available:
+## 🎯 Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is designed for **educational purposes only** to teach students about:
+- Browser fingerprinting and data collection techniques
+- The importance of verifying website authenticity before entering credentials
+- How phishing attacks gather user information
+- Why you should always read Terms of Service
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Realistic Login Page**: Mimics a legitimate sign-in interface
+- **Data Collection Dashboard**: Displays all collected user data including:
+  - Device & OS information with icons
+  - Browser details
+  - Hardware specs (CPU cores, RAM, GPU)
+  - Screen resolution and display info
+  - IP-based geolocation (city, country, ISP)
+  - Network connection details
+  - Timezone and language preferences
+  - Browser fingerprint capabilities
+- **Satirical Terms of Service**: Humorous terms highlighting why people should read ToS
+- **Mobile-Responsive Design**: Works on phones, tablets, and desktops
+- **"Password Almost Got You" Warning**: Snarky reminder about credential theft
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+- Node.js 18+ 
+- pnpm (or npm/yarn)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/awittmannTech/CYBER201-phishing-demo.git
+
+# Navigate to project directory
+cd CYBER201-phishing-demo
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+```
+
+### Production Build
+
+```bash
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+```
+
+## 🛠️ Tech Stack
+
+- **React 19** - UI framework
+- **Vite** - Build tool
+- **CSS3** - Styling with modern features
+- **ipapi.co** - IP geolocation API
+
+## ⚠️ Disclaimer
+
+**This project is for educational and demonstration purposes only.**
+
+Do NOT use this tool for:
+- Actual phishing attacks
+- Collecting real user credentials
+- Any malicious purposes
+
+Always obtain proper authorization before conducting security awareness training.
+
+## 📄 License
+
+MIT License - See LICENSE file for details.
+
+## 👤 Author
+
+Created for BYU-Idaho CYBER201 Security Awareness Training.

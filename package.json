@@ -1,7 +1,10 @@
 {
-  "name": "phishing-demo",
+  "name": "cyber201-phishing-demo",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Social engineering awareness demonstration for CYBER201",
+  "author": "awittmannTech",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
