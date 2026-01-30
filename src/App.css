@@ -7,6 +7,7 @@
   padding-right: 16px;
   position: relative;
   border-bottom: 1px solid #e0e2e2;
+  background-color: #ffffff;
 }
 
 .header-chad {
@@ -46,8 +47,8 @@
   padding: 48px 40px 40px;
   border: 1px solid #e0e2e2;
   border-radius: 2px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px 0px;
-  background: white;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
 }
 
 .card-header {
@@ -263,7 +264,7 @@
 
 /* Username Callout Card */
 .gotcha-username-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 24px;
@@ -333,7 +334,7 @@
 
 /* Data Cards */
 .data-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -520,7 +521,7 @@
 /* Feature Grid (for browser fingerprint) */
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 12px;
 }
 
@@ -534,6 +535,14 @@
   font-size: 13px;
   font-weight: 500;
   color: #64748b;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.feature-item span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .feature-item.enabled {
@@ -552,7 +561,7 @@
 
 /* Footer Section */
 .gotcha-footer {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   padding: 24px;
   text-align: center;
@@ -616,7 +625,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   max-width: 600px;
   width: 100%;
@@ -739,27 +748,127 @@
   .gotcha-title {
     font-size: 24px;
   }
-  
+
   .gotcha-subtitle {
     font-size: 14px;
   }
-  
+
   .feature-grid {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
   }
-  
+
   .feature-item {
     padding: 8px 10px;
     font-size: 12px;
   }
-  
+
   .username-value {
     font-size: 20px;
   }
-  
+
   .data-card {
     padding: 20px;
   }
+}
+
+/* ============================================
+   PRIVACY DETECTION STYLES
+   ============================================ */
+
+.card-icon.privacy-icon {
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+}
+
+.card-icon.advanced-fp-icon {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.privacy-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.privacy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.privacy-badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+.privacy-badge.detected {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.privacy-badge.not-detected {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.privacy-badge.unknown {
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.privacy-indicator {
+  display: block;
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.privacy-indicator.warning {
+  color: #b45309;
+}
+
+.privacy-indicator.success {
+  color: #059669;
+}
+
+/* Advanced Fingerprint Hash Display */
+.fingerprint-hash {
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  background: #f8fafc;
+  border-radius: 4px;
+  word-break: break-all;
+  color: #64748b;
+}
+
+/* WebRTC IP List */
+.webrtc-ips {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.webrtc-ip {
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-size: 11px;
+  padding: 4px 8px;
+  background: #f8fafc;
+  border-radius: 4px;
+  color: #1a1a2e;
+}
+
+.webrtc-ip.local {
+  border-left: 3px solid #059669;
+}
+
+.webrtc-ip.public {
+  border-left: 3px solid #dc2626;
 }
 

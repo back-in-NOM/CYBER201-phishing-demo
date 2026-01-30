@@ -141,6 +141,320 @@ const TimeIcon = () => (
   </svg>
 )
 
+const ShieldIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+  </svg>
+)
+
+const BlockIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.902 7.902 0 0 1 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.902 7.902 0 0 1 20 12c0 4.42-3.58 8-8 8z"/>
+  </svg>
+)
+
+// ============================================
+// FINGERPRINTING FUNCTIONS
+// ============================================
+
+// Canvas Fingerprint - renders a test pattern and hashes the result
+const getCanvasFingerprint = () => {
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = 200;
+    canvas.height = 50;
+    const ctx = canvas.getContext('2d');
+
+    // Draw text with various styles
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(125, 1, 62, 20);
+    ctx.fillStyle = '#069';
+    ctx.fillText('Cwm fjordbank glyphs vext quiz', 2, 15);
+    ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
+    ctx.fillText('Cwm fjordbank glyphs vext quiz', 4, 17);
+
+    // Add some shapes
+    ctx.beginPath();
+    ctx.arc(50, 50, 50, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.fill();
+
+    const dataURL = canvas.toDataURL();
+    // Simple hash function
+    let hash = 0;
+    for (let i = 0; i < dataURL.length; i++) {
+      const char = dataURL.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash).toString(16).padStart(8, '0');
+  } catch (e) {
+    return 'unavailable';
+  }
+};
+
+// Audio Fingerprint - uses AudioContext oscillator
+const getAudioFingerprint = async () => {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return 'unsupported';
+
+    const context = new (window.OfflineAudioContext || window.webkitOfflineAudioContext)(1, 44100, 44100);
+    const oscillator = context.createOscillator();
+    oscillator.type = 'triangle';
+    oscillator.frequency.setValueAtTime(10000, context.currentTime);
+
+    const compressor = context.createDynamicsCompressor();
+    compressor.threshold.setValueAtTime(-50, context.currentTime);
+    compressor.knee.setValueAtTime(40, context.currentTime);
+    compressor.ratio.setValueAtTime(12, context.currentTime);
+    compressor.attack.setValueAtTime(0, context.currentTime);
+    compressor.release.setValueAtTime(0.25, context.currentTime);
+
+    oscillator.connect(compressor);
+    compressor.connect(context.destination);
+    oscillator.start(0);
+
+    const buffer = await context.startRendering();
+    const data = buffer.getChannelData(0);
+
+    // Sum a portion of the audio data
+    let sum = 0;
+    for (let i = 4500; i < 5000; i++) {
+      sum += Math.abs(data[i]);
+    }
+
+    return sum.toString().replace('.', '').substring(0, 8);
+  } catch (e) {
+    return 'unavailable';
+  }
+};
+
+// WebRTC IP Leak Detection
+const getWebRTCIPs = () => {
+  return new Promise((resolve) => {
+    const ips = { local: [], public: [] };
+
+    try {
+      const RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+      if (!RTCPeerConnection) {
+        resolve(ips);
+        return;
+      }
+
+      const pc = new RTCPeerConnection({
+        iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+      });
+
+      pc.createDataChannel('');
+
+      const timeout = setTimeout(() => {
+        pc.close();
+        resolve(ips);
+      }, 3000);
+
+      pc.onicecandidate = (event) => {
+        if (!event.candidate) {
+          clearTimeout(timeout);
+          pc.close();
+          resolve(ips);
+          return;
+        }
+
+        const candidate = event.candidate.candidate;
+        const ipMatch = candidate.match(/([0-9]{1,3}\.){3}[0-9]{1,3}|([a-f0-9]{1,4}:){7}[a-f0-9]{1,4}/i);
+
+        if (ipMatch) {
+          const ip = ipMatch[0];
+          // Check if it's a local IP
+          if (ip.match(/^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|127\.|::1|fe80:)/i)) {
+            if (!ips.local.includes(ip)) ips.local.push(ip);
+          } else {
+            if (!ips.public.includes(ip)) ips.public.push(ip);
+          }
+        }
+      };
+
+      pc.createOffer().then(offer => pc.setLocalDescription(offer)).catch(() => {
+        clearTimeout(timeout);
+        resolve(ips);
+      });
+    } catch (e) {
+      resolve(ips);
+    }
+  });
+};
+
+// Ad Blocker Detection using bait elements
+const detectAdBlocker = () => {
+  return new Promise((resolve) => {
+    const bait = document.createElement('div');
+    bait.className = 'adsbox ad-banner pub_300x250 textAd banner-ad';
+    bait.style.cssText = 'width: 1px; height: 1px; position: absolute; left: -10000px; top: -10000px;';
+    bait.textContent = '\u00A0'; // Non-breaking space using textContent (safe)
+    document.body.appendChild(bait);
+
+    setTimeout(() => {
+      const detected = bait.offsetHeight === 0 ||
+                       bait.offsetWidth === 0 ||
+                       window.getComputedStyle(bait).display === 'none' ||
+                       window.getComputedStyle(bait).visibility === 'hidden';
+      document.body.removeChild(bait);
+      resolve(detected);
+    }, 100);
+  });
+};
+
+// VPN Detection Heuristics
+const detectVPN = (ipData, webrtcIPs, browserTimezone) => {
+  const indicators = [];
+  let likelyVPN = false;
+
+  if (ipData) {
+    // 1. Timezone mismatch
+    const ipTimezone = ipData.timezone;
+    if (ipTimezone && browserTimezone && ipTimezone !== browserTimezone) {
+      indicators.push(`Timezone mismatch: IP says ${ipTimezone}, browser says ${browserTimezone}`);
+      likelyVPN = true;
+    }
+
+    // 2. WebRTC leak check - public IP differs from geolocation API IP
+    if (webrtcIPs.public.length > 0) {
+      const webrtcPublic = webrtcIPs.public[0];
+      if (webrtcPublic !== ipData.ip) {
+        indicators.push(`WebRTC IP (${webrtcPublic}) differs from API IP (${ipData.ip})`);
+        likelyVPN = true;
+      }
+    }
+
+    // 3. Suspicious ISP keywords
+    const suspiciousKeywords = ['vpn', 'proxy', 'datacenter', 'hosting', 'aws', 'azure', 'google cloud', 'digitalocean', 'linode', 'vultr', 'hetzner', 'ovh'];
+    const isp = (ipData.isp || '').toLowerCase();
+    const org = (ipData.org || '').toLowerCase();
+    const combined = isp + ' ' + org;
+
+    for (const keyword of suspiciousKeywords) {
+      if (combined.includes(keyword)) {
+        indicators.push(`Suspicious ISP/Org: contains "${keyword}"`);
+        likelyVPN = true;
+        break;
+      }
+    }
+  }
+
+  return { likelyVPN, indicators };
+};
+
+// Media Query Preferences
+const getMediaQueryPreferences = () => {
+  const prefs = {};
+
+  // prefers-reduced-motion
+  prefs.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // prefers-color-scheme
+  prefs.colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+  // prefers-contrast
+  if (window.matchMedia('(prefers-contrast: more)').matches) {
+    prefs.contrast = 'more';
+  } else if (window.matchMedia('(prefers-contrast: less)').matches) {
+    prefs.contrast = 'less';
+  } else {
+    prefs.contrast = 'no-preference';
+  }
+
+  // dynamic-range (HDR)
+  prefs.hdr = window.matchMedia('(dynamic-range: high)').matches;
+
+  // pointer type
+  if (window.matchMedia('(pointer: fine)').matches) {
+    prefs.pointer = 'fine';
+  } else if (window.matchMedia('(pointer: coarse)').matches) {
+    prefs.pointer = 'coarse';
+  } else {
+    prefs.pointer = 'none';
+  }
+
+  // hover capability
+  prefs.hover = window.matchMedia('(hover: hover)').matches;
+
+  return prefs;
+};
+
+// IP Geolocation with fallback chain
+const fetchIPData = async () => {
+  // Fallback chain: ipwho.is -> freeipapi.com -> ipapi.co
+  const apis = [
+    {
+      url: 'https://ipwho.is/',
+      transform: (data) => ({
+        ip: data.ip,
+        city: data.city,
+        region: data.region,
+        country: data.country,
+        postal: data.postal,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        isp: data.connection?.isp || data.org,
+        org: data.connection?.org || data.org,
+        asn: data.connection?.asn,
+        timezone: data.timezone?.id
+      })
+    },
+    {
+      url: 'https://freeipapi.com/api/json/',
+      transform: (data) => ({
+        ip: data.ipAddress,
+        city: data.cityName,
+        region: data.regionName,
+        country: data.countryName,
+        postal: data.zipCode,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        isp: data.isp || '',
+        org: '',
+        asn: '',
+        timezone: data.timeZone
+      })
+    },
+    {
+      url: 'https://ipapi.co/json/',
+      transform: (data) => ({
+        ip: data.ip,
+        city: data.city,
+        region: data.region,
+        country: data.country_name,
+        postal: data.postal,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        isp: data.org,
+        org: data.org,
+        asn: data.asn,
+        timezone: data.timezone
+      })
+    }
+  ];
+
+  for (const api of apis) {
+    try {
+      const response = await fetch(api.url);
+      if (!response.ok) continue;
+      const data = await response.json();
+      if (data.ip || data.ipAddress) {
+        return api.transform(data);
+      }
+    } catch (e) {
+      console.warn(`IP API ${api.url} failed:`, e.message);
+      continue;
+    }
+  }
+
+  return null;
+};
+
 // Collect as much user data as possible
 const collectUserData = async () => {
   const data = {
@@ -153,7 +467,7 @@ const collectUserData = async () => {
     cookiesEnabled: navigator.cookieEnabled,
     doNotTrack: navigator.doNotTrack,
     onLine: navigator.onLine,
-    
+
     // Screen info
     screenWidth: window.screen.width,
     screenHeight: window.screen.height,
@@ -162,28 +476,28 @@ const collectUserData = async () => {
     colorDepth: window.screen.colorDepth,
     pixelDepth: window.screen.pixelDepth,
     devicePixelRatio: window.devicePixelRatio,
-    
+
     // Window info
     innerWidth: window.innerWidth,
     innerHeight: window.innerHeight,
     outerWidth: window.outerWidth,
     outerHeight: window.outerHeight,
-    
+
     // Hardware
     hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown',
     deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Unknown',
     maxTouchPoints: navigator.maxTouchPoints || 0,
-    
+
     // Time/Location
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     timezoneOffset: new Date().getTimezoneOffset(),
     localTime: new Date().toLocaleString(),
-    
+
     // Storage
     localStorageAvailable: !!window.localStorage,
     sessionStorageAvailable: !!window.sessionStorage,
     indexedDBAvailable: !!window.indexedDB,
-    
+
     // Features
     webGL: (() => {
       try {
@@ -199,11 +513,11 @@ const collectUserData = async () => {
       } catch (e) {}
       return { vendor: 'Unknown', renderer: 'Unknown' };
     })(),
-    
+
     // Page info
     referrer: document.referrer || 'Direct visit',
     currentURL: window.location.href,
-    
+
     // Connection info (if available)
     connection: (() => {
       const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
@@ -217,23 +531,57 @@ const collectUserData = async () => {
       }
       return null;
     })(),
-    
+
     // PDF viewer
     pdfViewerEnabled: navigator.pdfViewerEnabled,
-    
+
     // Media capabilities
     mediaDevices: !!navigator.mediaDevices,
-    
+
     // Geolocation support
     geolocationSupported: !!navigator.geolocation,
-    
+
+    // Additional navigator properties
+    webdriver: navigator.webdriver || false,
+    plugins: (() => {
+      const plugins = [];
+      if (navigator.plugins) {
+        for (let i = 0; i < Math.min(navigator.plugins.length, 10); i++) {
+          plugins.push(navigator.plugins[i].name);
+        }
+      }
+      return plugins;
+    })(),
+    bluetoothSupported: !!navigator.bluetooth,
+    usbSupported: !!navigator.usb,
+    serialSupported: !!navigator.serial,
+    userAgentData: navigator.userAgentData ? {
+      brands: navigator.userAgentData.brands?.map(b => `${b.brand} ${b.version}`).join(', ') || 'Unknown',
+      mobile: navigator.userAgentData.mobile,
+      platform: navigator.userAgentData.platform
+    } : null,
+
+    // Media query preferences
+    mediaPreferences: getMediaQueryPreferences(),
+
     // Battery (will be fetched async)
     battery: null,
-    
+
     // IP info (will be fetched async)
     ip: null,
+
+    // Advanced fingerprints (will be fetched async)
+    canvasFingerprint: null,
+    audioFingerprint: null,
+
+    // WebRTC IPs (will be fetched async)
+    webrtcIPs: null,
+
+    // Privacy detection (will be computed async)
+    adBlockerDetected: null,
+    vpnDetection: null,
   };
-  
+
   // Try to get battery info
   if (navigator.getBattery) {
     try {
@@ -248,26 +596,25 @@ const collectUserData = async () => {
       data.battery = null;
     }
   }
-  
-  // Try to get IP info
-  try {
-    const response = await fetch('https://ipapi.co/json/');
-    const ipData = await response.json();
-    data.ip = {
-      ip: ipData.ip,
-      city: ipData.city,
-      region: ipData.region,
-      country: ipData.country_name,
-      postal: ipData.postal,
-      latitude: ipData.latitude,
-      longitude: ipData.longitude,
-      isp: ipData.org,
-      asn: ipData.asn
-    };
-  } catch (e) {
-    data.ip = null;
-  }
-  
+
+  // Collect fingerprints and IP data in parallel
+  const [ipData, canvasFp, audioFp, webrtcIPs, adBlocker] = await Promise.all([
+    fetchIPData(),
+    Promise.resolve(getCanvasFingerprint()),
+    getAudioFingerprint(),
+    getWebRTCIPs(),
+    detectAdBlocker()
+  ]);
+
+  data.ip = ipData;
+  data.canvasFingerprint = canvasFp;
+  data.audioFingerprint = audioFp;
+  data.webrtcIPs = webrtcIPs;
+  data.adBlockerDetected = adBlocker;
+
+  // VPN detection (needs IP data and WebRTC IPs)
+  data.vpnDetection = detectVPN(ipData, webrtcIPs, data.timezone);
+
   return data;
 };
 
@@ -717,9 +1064,162 @@ function App() {
                     <span className="feature-status">{userData.doNotTrack === '1' ? '✓' : '✗'}</span>
                     <span>Do Not Track</span>
                   </div>
+                  <div className={`feature-item ${userData.webdriver ? 'disabled' : 'enabled'}`}>
+                    <span className="feature-status">{userData.webdriver ? '!' : '✓'}</span>
+                    <span>Not Automated</span>
+                  </div>
+                  <div className={`feature-item ${userData.bluetoothSupported ? 'enabled' : 'disabled'}`}>
+                    <span className="feature-status">{userData.bluetoothSupported ? '✓' : '✗'}</span>
+                    <span>Bluetooth API</span>
+                  </div>
+                  <div className={`feature-item ${userData.usbSupported ? 'enabled' : 'disabled'}`}>
+                    <span className="feature-status">{userData.usbSupported ? '✓' : '✗'}</span>
+                    <span>USB API</span>
+                  </div>
+                  <div className={`feature-item ${userData.serialSupported ? 'enabled' : 'disabled'}`}>
+                    <span className="feature-status">{userData.serialSupported ? '✓' : '✗'}</span>
+                    <span>Serial API</span>
+                  </div>
                 </div>
               </div>
-              
+
+              {/* Privacy Detection Card */}
+              <div className="data-card">
+                <div className="card-header-row">
+                  <div className="card-icon privacy-icon">
+                    <ShieldIcon />
+                  </div>
+                  <h3>Privacy Detection</h3>
+                </div>
+                <div className="privacy-badges">
+                  <span className={`privacy-badge ${userData.vpnDetection?.likelyVPN ? 'detected' : 'not-detected'}`}>
+                    <ShieldIcon />
+                    {userData.vpnDetection?.likelyVPN ? 'VPN Likely Detected' : 'No VPN Detected'}
+                  </span>
+                  <span className={`privacy-badge ${userData.adBlockerDetected ? 'detected' : 'not-detected'}`}>
+                    <BlockIcon />
+                    {userData.adBlockerDetected ? 'Ad Blocker Detected' : 'No Ad Blocker'}
+                  </span>
+                </div>
+                <div className="data-grid">
+                  {userData.vpnDetection?.indicators?.length > 0 && (
+                    <div className="data-item" style={{ gridColumn: '1 / -1' }}>
+                      <div className="data-text">
+                        <span className="data-label">VPN Indicators</span>
+                        {userData.vpnDetection.indicators.map((indicator, i) => (
+                          <span key={i} className="privacy-indicator warning">⚠ {indicator}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {userData.webrtcIPs && (userData.webrtcIPs.local.length > 0 || userData.webrtcIPs.public.length > 0) && (
+                    <div className="data-item" style={{ gridColumn: '1 / -1' }}>
+                      <div className="data-text">
+                        <span className="data-label">WebRTC IP Leak</span>
+                        <div className="webrtc-ips">
+                          {userData.webrtcIPs.local.map((ip, i) => (
+                            <span key={`local-${i}`} className="webrtc-ip local">{ip} (local)</span>
+                          ))}
+                          {userData.webrtcIPs.public.map((ip, i) => (
+                            <span key={`public-${i}`} className="webrtc-ip public">{ip} (public)</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {(!userData.webrtcIPs || (userData.webrtcIPs.local.length === 0 && userData.webrtcIPs.public.length === 0)) && (
+                    <div className="data-item">
+                      <div className="data-text">
+                        <span className="data-label">WebRTC</span>
+                        <span className="privacy-indicator success">No IP leak detected</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Advanced Fingerprint Card */}
+              <div className="data-card">
+                <div className="card-header-row">
+                  <div className="card-icon advanced-fp-icon">
+                    <FingerprintIcon />
+                  </div>
+                  <h3>Advanced Fingerprint</h3>
+                </div>
+                <div className="data-grid">
+                  <div className="data-item">
+                    <div className="data-text">
+                      <span className="data-label">Canvas Hash</span>
+                      <span className="fingerprint-hash">{userData.canvasFingerprint || 'unavailable'}</span>
+                    </div>
+                  </div>
+                  <div className="data-item">
+                    <div className="data-text">
+                      <span className="data-label">Audio Hash</span>
+                      <span className="fingerprint-hash">{userData.audioFingerprint || 'unavailable'}</span>
+                    </div>
+                  </div>
+                  {userData.mediaPreferences && (
+                    <>
+                      <div className="data-item">
+                        <div className="data-text">
+                          <span className="data-label">Color Scheme</span>
+                          <span className="data-value">{userData.mediaPreferences.colorScheme}</span>
+                        </div>
+                      </div>
+                      <div className="data-item">
+                        <div className="data-text">
+                          <span className="data-label">Pointer Type</span>
+                          <span className="data-value">{userData.mediaPreferences.pointer}</span>
+                        </div>
+                      </div>
+                      <div className="data-item">
+                        <div className="data-text">
+                          <span className="data-label">Hover Support</span>
+                          <span className="data-value">{userData.mediaPreferences.hover ? 'Yes' : 'No'}</span>
+                        </div>
+                      </div>
+                      <div className="data-item">
+                        <div className="data-text">
+                          <span className="data-label">HDR Display</span>
+                          <span className="data-value">{userData.mediaPreferences.hdr ? 'Yes' : 'No'}</span>
+                        </div>
+                      </div>
+                      <div className="data-item">
+                        <div className="data-text">
+                          <span className="data-label">Reduced Motion</span>
+                          <span className="data-value">{userData.mediaPreferences.reducedMotion ? 'Preferred' : 'No preference'}</span>
+                        </div>
+                      </div>
+                      <div className="data-item">
+                        <div className="data-text">
+                          <span className="data-label">Contrast Pref</span>
+                          <span className="data-value">{userData.mediaPreferences.contrast}</span>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  {userData.plugins && userData.plugins.length > 0 && (
+                    <div className="data-item" style={{ gridColumn: '1 / -1' }}>
+                      <div className="data-text">
+                        <span className="data-label">Browser Plugins</span>
+                        <span className="data-value small">{userData.plugins.join(', ')}</span>
+                      </div>
+                    </div>
+                  )}
+                  {userData.userAgentData && (
+                    <div className="data-item" style={{ gridColumn: '1 / -1' }}>
+                      <div className="data-text">
+                        <span className="data-label">UA Client Hints</span>
+                        <span className="data-value small">
+                          {userData.userAgentData.platform} | Mobile: {userData.userAgentData.mobile ? 'Yes' : 'No'} | {userData.userAgentData.brands}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
               {/* Referrer Card */}
               <div className="data-card full-width">
                 <div className="card-header-row">
