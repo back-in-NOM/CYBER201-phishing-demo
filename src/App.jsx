@@ -1363,6 +1363,7 @@ function App() {
                 className="form-input"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter' && username.trim()) handleGotcha(); }}
                 autoComplete="username"
               />
             </div>
