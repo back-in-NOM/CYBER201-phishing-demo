@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import AdUnit from './components/AdUnit'
 
 // SVG Icons for the links
 const PersonAddIcon = () => (
@@ -769,7 +770,14 @@ function App() {
               </p>
             </div>
           )}
-          
+
+          {/* Ad Unit - After username card */}
+          <AdUnit
+            slot="XXXXXXXXXX"
+            format="horizontal"
+            className="ad-unit-horizontal"
+          />
+
           {/* Data Dashboard */}
           {userData && parsedUA && (
             <div className="gotcha-dashboard">
@@ -896,7 +904,16 @@ function App() {
                   </div>
                 </div>
               </div>
-              
+
+              {/* Ad Unit - Middle of dashboard */}
+              <div className="data-card ad-card">
+                <AdUnit
+                  slot="XXXXXXXXXX"
+                  format="rectangle"
+                  className="ad-unit-inline"
+                />
+              </div>
+
               {/* Location Card */}
               {userData.ip && (
                 <div className="data-card location-card">
@@ -1243,7 +1260,14 @@ function App() {
               
             </div>
           )}
-          
+
+          {/* Ad Unit - Before footer */}
+          <AdUnit
+            slot="XXXXXXXXXX"
+            format="horizontal"
+            className="ad-unit-horizontal"
+          />
+
           {/* Educational footer */}
           <div className="gotcha-footer">
             <p className="gotcha-lesson">
