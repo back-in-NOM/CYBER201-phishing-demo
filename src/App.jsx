@@ -1378,13 +1378,13 @@ function App() {
           </p>
 
           <div className="links-section">
-            <button className="link-button" onClick={handleGotcha}>
+            <button className="link-button" onClick={(e) => e.preventDefault()}>
               <span className="link-icon">
                 <PersonAddIcon />
               </span>
               Create a new account
             </button>
-            <button className="link-button" onClick={handleGotcha}>
+            <button className="link-button" onClick={(e) => e.preventDefault()}>
               <span className="link-icon">
                 <HelpIcon />
               </span>
@@ -1394,7 +1394,9 @@ function App() {
         </div>
 
         <div className="chad-container">
-          <img src="/images/chad.png" alt="" className="chad-image" />
+          <a href="https://www.youtube.com/watch?v=AnwNuH497RE" target="_blank" rel="noopener noreferrer">
+            <img src="/images/chad.png" alt="" className="chad-image" />
+          </a>
         </div>
       </main>
     </>
