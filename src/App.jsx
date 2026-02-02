@@ -812,7 +812,7 @@ function App() {
             <img className='header-chad' role="presentation" src="/images/chad.png" alt="" style={{ margin: '0px', padding: '0px' }} height="36" />
           </div>
           <img role="presentation" src="/images/blueRays.svg" alt="" style={{ margin: '0px', padding: '0px' }} height="74" width="48" />
-          <a href="https://www.churchofjesuschrist.org/?lang=eng" style={{ display: 'flex', alignItems: 'center' }}>
+          <a href="https://gigachad.website" style={{ display: 'flex', alignItems: 'center' }}>
             <img role="presentation" src="/images/logo.png" alt="The Church of Jesus Christ of Latter-day Saints" style={{ margin: '0px', padding: '0px' }} height="74" />
           </a>
         </div>
