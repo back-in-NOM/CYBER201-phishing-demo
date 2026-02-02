@@ -4,7 +4,11 @@
       "Bash(npx tsx:*)",
       "Bash(git add:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: Disable account buttons and add easter egg to chad image\n\n- Create a new account and forgot password buttons now do nothing\n- Chad image at bottom links to YouTube video as hidden easter egg\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: remove duplicate ShieldIcon declaration\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: add note explaining VirusTotal results for demo site\n\nClarifies that this demo site won''t show as dangerous on VirusTotal\nsince it doesn''t actually transmit data maliciously, while emphasizing\nthat real phishing sites would be flagged.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: add security tips section with VPN, 2FA, and more\n\nAdded a comprehensive security tips section covering:\n- Using a VPN to protect privacy\n- Password managers for secure credentials\n- Two-factor authentication \\(2FA\\)\n- URL verification best practices\n- Privacy browser extensions\n- Keeping software updated\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)"
     ]
   }
 }
