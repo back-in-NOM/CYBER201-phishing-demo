@@ -1309,6 +1309,10 @@ function App() {
               <p className="virustotal-tip">
                 <strong>Pro tip:</strong> You can also scan files you've downloaded before opening them. When in doubt, scan it out!
               </p>
+              <p className="virustotal-note">
+                <strong>Note:</strong> If you scan this demo site on VirusTotal, it won't show as dangerous - that's because this site doesn't actually steal or transmit your data anywhere malicious.
+                However, a real phishing site would! VirusTotal is a great resource to check if a site has been reported as malicious or untrustworthy by the security community.
+              </p>
             </div>
 
             <button className="btn-reset" onClick={handleReset}>
