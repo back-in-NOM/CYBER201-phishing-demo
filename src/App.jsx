@@ -1438,7 +1438,7 @@ function App() {
       <header className="header">
         <div style={{ display: 'flex' }}>
           <div style={{ backgroundColor: 'rgb(0, 125, 165)', height: '74px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '56px', padding: '0px', margin: '0px' }}>
-            <img className='header-chad' role="presentation" src="/images/chad.png" alt="" style={{ margin: '0px', padding: '0px' }} height="36" />
+            <img className='header-chad' role="presentation" src="/images/chad_back.png" alt="" style={{ margin: '0px', padding: '0px' }} height="36" />
           </div>
           <img role="presentation" src="/images/blueRays.svg" alt="" style={{ margin: '0px', padding: '0px' }} height="74" width="48" />
           <a href="https://gigachad.website" style={{ display: 'flex', alignItems: 'center' }}>
@@ -1501,7 +1501,7 @@ function App() {
 
         <div className="chad-container">
           <a href="https://www.youtube.com/watch?v=AnwNuH497RE" target="_blank" rel="noopener noreferrer">
-            <img src="/images/chad.png" alt="" className="chad-image" />
+            <img src="/images/chad_back.png" alt="" className="chad-image" />
           </a>
         </div>
       </main>
