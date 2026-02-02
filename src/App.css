@@ -710,6 +710,102 @@
   color: #1e3a8a;
 }
 
+/* Security Tips Section */
+.security-tips-section {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+  border: 1px solid #e9d5ff;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 24px 0;
+  text-align: left;
+}
+
+.security-tips-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.security-tips-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #581c87;
+}
+
+.security-tips-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.security-tips-icon svg {
+  width: 22px;
+  height: 22px;
+  color: white;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.tip-card {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tip-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tip-card-header h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.tip-emoji {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.tip-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.security-tips-footer {
+  font-size: 13px;
+  color: #6b21a8;
+  background: #f3e8ff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 0;
+  border-left: 3px solid #a855f7;
+}
+
+.security-tips-footer strong {
+  color: #581c87;
+}
+
 .btn-reset {
   display: inline-flex;
   align-items: center;

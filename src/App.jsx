@@ -1315,6 +1315,71 @@ function App() {
               </p>
             </div>
 
+            {/* Security Tips Section */}
+            <div className="security-tips-section">
+              <div className="security-tips-header">
+                <div className="security-tips-icon">
+                  <ShieldIcon />
+                </div>
+                <h3>More Ways to Protect Yourself Online</h3>
+              </div>
+
+              <div className="tips-grid">
+                <div className="tip-card">
+                  <div className="tip-card-header">
+                    <span className="tip-emoji">🔐</span>
+                    <h4>Use a VPN</h4>
+                  </div>
+                  <p>A Virtual Private Network encrypts your internet traffic and masks your IP address, making it harder for attackers to track your location or intercept your data. Great options include NordVPN, ExpressVPN, or ProtonVPN.</p>
+                </div>
+
+                <div className="tip-card">
+                  <div className="tip-card-header">
+                    <span className="tip-emoji">🔑</span>
+                    <h4>Use a Password Manager</h4>
+                  </div>
+                  <p>Password managers like Bitwarden, 1Password, or LastPass generate and store unique, strong passwords for every site. They also won't autofill on fake phishing sites - a built-in protection!</p>
+                </div>
+
+                <div className="tip-card">
+                  <div className="tip-card-header">
+                    <span className="tip-emoji">📱</span>
+                    <h4>Enable Two-Factor Authentication (2FA)</h4>
+                  </div>
+                  <p>Even if someone steals your password, 2FA requires a second verification (like a code from your phone). Enable it on all important accounts - email, banking, social media.</p>
+                </div>
+
+                <div className="tip-card">
+                  <div className="tip-card-header">
+                    <span className="tip-emoji">🔗</span>
+                    <h4>Always Check the URL</h4>
+                  </div>
+                  <p>Before entering any credentials, verify you're on the correct website. Look for HTTPS, check for misspellings (like "g00gle" instead of "google"), and be wary of unfamiliar domains.</p>
+                </div>
+
+                <div className="tip-card">
+                  <div className="tip-card-header">
+                    <span className="tip-emoji">🧩</span>
+                    <h4>Use Privacy Browser Extensions</h4>
+                  </div>
+                  <p>Extensions like uBlock Origin, Privacy Badger, and HTTPS Everywhere can block trackers, malicious scripts, and ensure secure connections. They're free and easy to install.</p>
+                </div>
+
+                <div className="tip-card">
+                  <div className="tip-card-header">
+                    <span className="tip-emoji">🔄</span>
+                    <h4>Keep Software Updated</h4>
+                  </div>
+                  <p>Updates often include security patches for newly discovered vulnerabilities. Enable automatic updates for your OS, browser, and apps to stay protected against the latest threats.</p>
+                </div>
+              </div>
+
+              <p className="security-tips-footer">
+                <strong>Remember:</strong> Staying safe online is about building good habits. No single tool provides complete protection -
+                it's the combination of awareness, tools, and skepticism that keeps you secure.
+              </p>
+            </div>
+
             <button className="btn-reset" onClick={handleReset}>
               Try Again
             </button>
