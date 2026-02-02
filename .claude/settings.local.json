@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx tsx:*)"
+      "Bash(npx tsx:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: Disable account buttons and add easter egg to chad image\n\n- Create a new account and forgot password buttons now do nothing\n- Chad image at bottom links to YouTube video as hidden easter egg\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)"
     ]
   }
 }
