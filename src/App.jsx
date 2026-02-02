@@ -148,6 +148,12 @@ const ShieldIcon = () => (
   </svg>
 )
 
+const ShieldIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+  </svg>
+)
+
 const BlockIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor">
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.902 7.902 0 0 1 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.902 7.902 0 0 1 20 12c0 4.42-3.58 8-8 8z"/>
@@ -1271,10 +1277,46 @@ function App() {
           {/* Educational footer */}
           <div className="gotcha-footer">
             <p className="gotcha-lesson">
-              <strong>🎓 The Lesson:</strong> All of this information was collected without asking for your permission. 
+              <strong>🎓 The Lesson:</strong> All of this information was collected without asking for your permission.
               Real phishing sites can capture this data and much more, including your credentials if you enter them.
               Always verify you're on the correct website before entering sensitive information!
             </p>
+
+            {/* VirusTotal Section */}
+            <div className="virustotal-section">
+              <div className="virustotal-header">
+                <div className="virustotal-icon">
+                  <ShieldIcon />
+                </div>
+                <h3>Protect Yourself with VirusTotal</h3>
+              </div>
+              <p className="virustotal-description">
+                Before visiting suspicious links, you can use <a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal</a> to scan URLs for malicious content.
+                VirusTotal aggregates data from 70+ antivirus scanners and URL/domain blocklisting services to help you identify potential threats.
+              </p>
+              <div className="virustotal-steps">
+                <div className="step">
+                  <span className="step-number">1</span>
+                  <span className="step-text">Go to <a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">virustotal.com</a></span>
+                </div>
+                <div className="step">
+                  <span className="step-number">2</span>
+                  <span className="step-text">Click the "URL" tab</span>
+                </div>
+                <div className="step">
+                  <span className="step-number">3</span>
+                  <span className="step-text">Paste the suspicious link and click "Search"</span>
+                </div>
+                <div className="step">
+                  <span className="step-number">4</span>
+                  <span className="step-text">Review the results - if multiple scanners flag it as malicious, don't visit!</span>
+                </div>
+              </div>
+              <p className="virustotal-tip">
+                <strong>Pro tip:</strong> You can also scan files you've downloaded before opening them. When in doubt, scan it out!
+              </p>
+            </div>
+
             <button className="btn-reset" onClick={handleReset}>
               Try Again
             </button>
