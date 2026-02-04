@@ -1330,7 +1330,7 @@ function App() {
                     <span className="tip-emoji">🔐</span>
                     <h4>Use a VPN</h4>
                   </div>
-                  <p>A Virtual Private Network encrypts your internet traffic and masks your IP address, making it harder for attackers to track your location or intercept your data. Great options include NordVPN, ExpressVPN, or ProtonVPN.</p>
+                  <p>A Virtual Private Network encrypts your internet traffic and masks your IP address, making it harder for attackers to track your location or intercept your data. Great options include Mullvad VPN or ProtonVPN.</p>
                 </div>
 
                 <div className="tip-card">
@@ -1338,7 +1338,7 @@ function App() {
                     <span className="tip-emoji">🔑</span>
                     <h4>Use a Password Manager</h4>
                   </div>
-                  <p>Password managers like Bitwarden, 1Password, or LastPass generate and store unique, strong passwords for every site. They also won't autofill on fake phishing sites - a built-in protection!</p>
+                  <p>Password managers like Bitwarden, 1Password, or LastPass generate and store unique, strong passwords for every site.</p>
                 </div>
 
                 <div className="tip-card">
