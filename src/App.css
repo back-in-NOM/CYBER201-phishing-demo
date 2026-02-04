@@ -227,14 +227,14 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
-  color: white;
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
+  color: #5a3a0a;
   padding: 8px 20px;
   border-radius: 50px;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 16px;
-  box-shadow: 0 4px 15px rgba(238, 90, 90, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 197, 109, 0.3);
 }
 
 .gotcha-warning-badge svg {
@@ -257,7 +257,7 @@
 }
 
 .gotcha-subtitle em {
-  color: #ef4444;
+  color: #d97706;
   font-style: normal;
   font-weight: 600;
 }
@@ -279,7 +279,7 @@
 .username-icon {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -316,10 +316,10 @@
   width: 100%;
   margin: 8px 0 0 0;
   padding: 12px 16px;
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
   border-radius: 10px;
   font-size: 15px;
-  color: #92400e;
+  color: #5a3a0a;
   font-weight: 500;
 }
 
@@ -384,31 +384,31 @@
 }
 
 .card-icon.device-icon {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 .card-icon.hardware-icon {
-  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 .card-icon.screen-icon {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 .card-icon.location-icon {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 .card-icon.network-icon {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 .card-icon.time-icon {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 .card-icon.fingerprint-icon {
-  background: linear-gradient(135deg, #ec4899, #db2777);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 /* Data Grid */
@@ -585,8 +585,8 @@
 
 /* VirusTotal Section */
 .virustotal-section {
-  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-  border: 1px solid #bbf7d0;
+  background: linear-gradient(135deg, #fff9ed 0%, #fff3dc 100%);
+  border: 1px solid #ffd68d;
   border-radius: 12px;
   padding: 24px;
   margin: 24px 0;
@@ -604,13 +604,13 @@
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #166534;
+  color: #7a4a0a;
 }
 
 .virustotal-icon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -632,7 +632,7 @@
 }
 
 .virustotal-description a {
-  color: #16a34a;
+  color: #d97706;
   font-weight: 600;
   text-decoration: none;
 }
@@ -657,8 +657,8 @@
 .step-number {
   width: 28px;
   height: 28px;
-  background: #22c55e;
-  color: white;
+  background: #ffc56d;
+  color: #5a3a0a;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -674,7 +674,7 @@
 }
 
 .step-text a {
-  color: #16a34a;
+  color: #d97706;
   font-weight: 600;
   text-decoration: none;
 }
@@ -686,34 +686,34 @@
 .virustotal-tip {
   font-size: 13px;
   color: #475569;
-  background: #dcfce7;
+  background: #fff3dc;
   padding: 12px 16px;
   border-radius: 8px;
   margin: 0;
 }
 
 .virustotal-tip strong {
-  color: #166534;
+  color: #7a4a0a;
 }
 
 .virustotal-note {
   font-size: 13px;
-  color: #1e40af;
-  background: #dbeafe;
+  color: #7a4a0a;
+  background: #fff3dc;
   padding: 12px 16px;
   border-radius: 8px;
   margin: 16px 0 0 0;
-  border-left: 3px solid #3b82f6;
+  border-left: 3px solid #ffc56d;
 }
 
 .virustotal-note strong {
-  color: #1e3a8a;
+  color: #5a3a0a;
 }
 
 /* Security Tips Section */
 .security-tips-section {
-  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-  border: 1px solid #e9d5ff;
+  background: linear-gradient(135deg, #fff9ed 0%, #fff3dc 100%);
+  border: 1px solid #ffd68d;
   border-radius: 12px;
   padding: 24px;
   margin: 24px 0;
@@ -731,13 +731,13 @@
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #581c87;
+  color: #7a4a0a;
 }
 
 .security-tips-icon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #a855f7, #9333ea);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -794,16 +794,16 @@
 
 .security-tips-footer {
   font-size: 13px;
-  color: #6b21a8;
-  background: #f3e8ff;
+  color: #7a4a0a;
+  background: #fff3dc;
   padding: 12px 16px;
   border-radius: 8px;
   margin: 0;
-  border-left: 3px solid #a855f7;
+  border-left: 3px solid #ffc56d;
 }
 
 .security-tips-footer strong {
-  color: #581c87;
+  color: #5a3a0a;
 }
 
 .btn-reset {
@@ -817,15 +817,15 @@
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  color: white;
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
+  color: #5a3a0a;
   transition: all 0.2s;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 197, 109, 0.3);
 }
 
 .btn-reset:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 20px rgba(255, 197, 109, 0.4);
 }
 
 /* ============================================
@@ -1000,11 +1000,11 @@
    ============================================ */
 
 .card-icon.privacy-icon {
-  background: linear-gradient(135deg, #a855f7, #9333ea);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 .card-icon.advanced-fp-icon {
-  background: linear-gradient(135deg, #f97316, #ea580c);
+  background: linear-gradient(135deg, #ffd68d, #ffc56d);
 }
 
 .privacy-badges {
@@ -1030,8 +1030,8 @@
 }
 
 .privacy-badge.detected {
-  background: #fef3c7;
-  color: #92400e;
+  background: #fff3dc;
+  color: #7a4a0a;
 }
 
 .privacy-badge.not-detected {
@@ -1053,7 +1053,7 @@
 }
 
 .privacy-indicator.warning {
-  color: #b45309;
+  color: #d97706;
 }
 
 .privacy-indicator.success {
@@ -1088,11 +1088,11 @@
 }
 
 .webrtc-ip.local {
-  border-left: 3px solid #059669;
+  border-left: 3px solid #ffc56d;
 }
 
 .webrtc-ip.public {
-  border-left: 3px solid #dc2626;
+  border-left: 3px solid #ffc56d;
 }
 
 /* ============================================
