@@ -208,7 +208,11 @@
 
 .gotcha-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  background: linear-gradient(135deg, rgba(245, 247, 250, 0.95) 0%, rgba(228, 232, 236, 0.95) 100%),
+              url('/images/gigachadd.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   padding: 20px;
 }
 
